@@ -1,7 +1,7 @@
 const Track = () => {
   return (
     <section>
-      <div className="container mx-auto !px-5 !py-10 md:!py-14">
+      <div className="container !mx-auto !px-5 !py-10 md:!py-14">
         {/* main  */}
         <div className="flex flex-wrap !-m-4 text-center">
           {/* Track 1 */}

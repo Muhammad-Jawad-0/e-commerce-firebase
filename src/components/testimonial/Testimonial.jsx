@@ -16,7 +16,7 @@ const Testimonial = () => {
             saying
           </h2>
 
-          <div className="flex flex-wrap -m-4">
+          <div className="flex flex-wrap !-m-4">
             {/* Testimonial 1 */}
             <div className="lg:w-1/3 lg:mb-0 !mb-6 !p-4">
               <div className="h-full text-center">
@@ -40,7 +40,7 @@ const Testimonial = () => {
             </div>
 
             {/* Testimonial 2 */}
-            <div className="lg:w-1/3 lg:mb-0 !mb-6 !p-4">
+            <div className="lg:w-1/3 lg:!mb-0 !mb-6 !p-4">
               <div className="h-full text-center">
                 <img
                   alt="testimonial"
@@ -62,7 +62,7 @@ const Testimonial = () => {
             </div>
 
             {/* Testimonial 3 */}
-            <div className="lg:w-1/3 lg:mb-0 !p-4">
+            <div className="lg:w-1/3 lg:!mb-0 !p-4">
               <div className="h-full text-center">
                 <img
                   alt="testimonial"

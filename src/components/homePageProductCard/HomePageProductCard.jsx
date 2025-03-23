@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 // productData
 const productData = [
   {
@@ -83,6 +85,7 @@ const productData = [
 ];
 
 const HomePageProductCard = () => {
+  const navigate = useNavigate()
     return (
       <div className="!mt-6">
         {/* Heading  */}
@@ -105,6 +108,7 @@ const HomePageProductCard = () => {
                         className="lg:h-80  h-96 w-full"
                         src={image}
                         alt="blog"
+                        onClick={() => navigate("/productinfo")}
                       />
                       <div className="!p-6">
                         <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 !mb-1">
