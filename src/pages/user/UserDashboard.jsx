@@ -14,6 +14,7 @@ const products = [
 ];
 
 const UserDashboard = () => {
+  let user = JSON.parse(localStorage.getItem("users"))
   return (
     <Layout>
       <div className=" container !mx-auto !px-4 !py-5 lg:!py-8">
@@ -31,10 +32,10 @@ const UserDashboard = () => {
             {/* text  */}
             <div className="">
               <h1 className=" text-center text-lg">
-                <span className=" font-bold">Name :</span> Kamal Nayan Upadhyay
+                <span className=" font-bold">Name :</span> {user.name}
               </h1>
               <h1 className=" text-center text-lg">
-                <span className=" font-bold">Email :</span> test@gmail.com
+                <span className=" font-bold">Email :</span> {user.email}
               </h1>
             </div>
           </div>

@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import myContext from "../../context/myContext";
 import toast from "react-hot-toast";
+import Loader from "../../components/loader/Loader";
 import {
   signInWithEmailAndPassword,
   auth,
@@ -48,22 +49,37 @@ const Login = () => {
       console.log(users, "<<< login user");
 
       try {
-        // const q = query(
-        //   collection(fireDB, "user"),
-        //   where("uid", "===", users?.user?.uid)
-        // );
         const q = query(
           collection(fireDB, "user"),
-          where("uid", "===", users?.user?.uid)
+          where("uid", "==", users?.user?.uid)
         );
+
         const data = onSnapshot(q, (querySnapshot) => {
           let user;
-          querySnapshot.forEach((doc) => {
-            user = doc.data();
+
+          querySnapshot.forEach((doc) => (user = doc.data()));
+          localStorage.setItem("users", JSON.stringify(user));
+          setUserLogin({
+            email: "",
+            password: "",
           });
-          console.log("Current cities in CA: ", cities.join(", "));
+
+          toast.success("Login Successfully");
+          setLoading(false);
+
+          if (user.role === "user") {
+            navigate("/user-dashboard");
+          } else {
+            navigate("/admin-dashboard");
+          }
         });
-      } catch (error) {}
+
+        return () => data;
+      } catch (error) {
+        console.log("err >>>", error);
+        setLoading(false);
+        toast.error("Login Catch Error");
+      }
 
       // -------======================*******************-================
     } catch (error) {
@@ -75,6 +91,8 @@ const Login = () => {
 
   return (
     <div className="flex justify-center items-center h-screen">
+      {/* Loading Component */}
+      {loading && <Loader />}
       {/* Login Form  */}
       <div className="login_Form bg-pink-50 !px-1 lg:!px-8 !py-6 border border-pink-100 rounded-xl shadow-md">
         {/* Top Heading  */}

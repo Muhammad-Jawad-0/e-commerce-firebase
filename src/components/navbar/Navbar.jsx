@@ -1,7 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SearchBar from "../searchBar/SearchBar";
 
 const Navbar = () => {
+  // get user from localStorage
+  let user = JSON.parse(localStorage.getItem("users"));
+  // navigate
+  let navigate = useNavigate();
+
+  const logout = () => {
+    localStorage.clear("users");
+    navigate("/login");
+  };
+
   // navList Data
   const navList = (
     <ul className="flex !space-x-3 text-white font-medium text-md !px-5 !gap-x-5">
@@ -16,19 +26,45 @@ const Navbar = () => {
       </li>
 
       {/* Signup */}
-      <li>
-        <Link to={"/signup"}>Signup</Link>
-      </li>
+      {!user ? (
+        <li>
+          <Link to={"/signup"}>Signup</Link>
+        </li>
+      ) : (
+        ""
+      )}
+      {/* Login */}
+      {!user ? (
+        <li>
+          <Link to={"/login"}>Login</Link>
+        </li>
+      ) : (
+        ""
+      )}
 
       {/* User */}
-      <li>
-        <Link to={"/user-dashboard"}>Kamal</Link>
-      </li>
+
+      {user?.role === "user" && (
+        <li>
+          <Link to={"/user-dashboard"}>{user?.name}</Link>
+        </li>
+      )}
 
       {/* Admin */}
-      <li>
-        <Link to={"/admin-dashboard"}>Admin</Link> {/* Admin Dashboard */}
-      </li>
+      {user?.role === "admin" && (
+        <li>
+          <Link to={"/admin-dashboard"}>{user?.name}</Link>{" "}
+          {/* Admin Dashboard */}
+        </li>
+      )}
+
+      {/* LOGOUT */}
+
+      {user && (
+        <li className="cursor-pointer" onClick={logout}>
+          Logout
+        </li>
+      )}
 
       {/* Cart */}
       <li>
