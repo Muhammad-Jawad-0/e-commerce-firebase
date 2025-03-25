@@ -33,9 +33,9 @@ const Signup = () => {
   const userSignupFunction = async () => {
     // Validation
     if (
-      userSignup.name === "" ||
-      userSignup.email === "" ||
-      userSignup.password === ""
+      userSignup.name.trim() === "" ||
+      userSignup.email.trim() === "" ||
+      userSignup.password.trim() === ""
     ) {
       return toast.error("All Feilds Are Required");
     }
@@ -48,6 +48,7 @@ const Signup = () => {
         userSignup.email,
         userSignup.password
       );
+
 
       // create user object
 
@@ -84,6 +85,7 @@ const Signup = () => {
     } catch (error) {
       console.log("error >>", error);
       setLoading(false);
+      toast.error("catch error");
     }
   };
 

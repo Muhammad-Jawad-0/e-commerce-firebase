@@ -1,7 +1,17 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getFirestore } from 'firebase/firestore';
-import { getAuth,createUserWithEmailAndPassword } from 'firebase/auth';
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import {
+  getFirestore,
+  query,
+  collection,
+  where,
+  onSnapshot,
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDUrCJ3ecQENNJM6gRoYz0R1PnxarrC00E",
@@ -19,4 +29,13 @@ const analytics = getAnalytics(app);
 const fireDB = getFirestore(app);
 const auth = getAuth(app);
 
-export { fireDB, auth ,createUserWithEmailAndPassword}
+export {
+  fireDB,
+  auth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  query,
+  collection,
+  where,
+  onSnapshot,
+};
