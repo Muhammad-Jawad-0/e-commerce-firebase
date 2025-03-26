@@ -46,13 +46,15 @@ const Login = () => {
         userLogin.password
       );
 
-      console.log(users, "<<< login user");
+      // console.log(users, "<<< login user");
 
       try {
         const q = query(
           collection(fireDB, "user"),
           where("uid", "==", users?.user?.uid)
         );
+
+        console.log(q,"<<>..,,,,<<")
 
         const data = onSnapshot(q, (querySnapshot) => {
           let user;
