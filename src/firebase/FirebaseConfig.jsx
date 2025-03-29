@@ -11,6 +11,12 @@ import {
   collection,
   where,
   onSnapshot,
+  Timestamp,
+  addDoc,
+  orderBy,
+  getDoc,
+  setDoc,
+  doc
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -38,4 +44,10 @@ export {
   collection,
   where,
   onSnapshot,
+  Timestamp,
+  addDoc,
+  orderBy,
+  getDoc,
+  doc,
+  setDoc
 };
