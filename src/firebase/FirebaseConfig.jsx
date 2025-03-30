@@ -16,7 +16,8 @@ import {
   orderBy,
   getDoc,
   setDoc,
-  doc
+  doc,
+  deleteDoc
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -49,5 +50,6 @@ export {
   orderBy,
   getDoc,
   doc,
-  setDoc
+  setDoc,
+  deleteDoc
 };
