@@ -3,11 +3,15 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
 import { ThemeProvider } from "@material-tailwind/react";
+import { store } from "./redux-toolkit/store.jsx";
+import { Provider } from "react-redux";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <ThemeProvider>
-      <App />
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
+    </Provider>
   </StrictMode>
 );
