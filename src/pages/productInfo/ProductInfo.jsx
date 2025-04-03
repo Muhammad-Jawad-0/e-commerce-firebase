@@ -5,12 +5,16 @@ import myContext from "../../context/myContext";
 import toast from "react-hot-toast";
 import { doc, fireDB, getDoc } from "../../firebase/FirebaseConfig";
 import Loader from "../../components/loader/Loader";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, deleteFromCart } from "../../redux-toolkit/CartSlice";
 
 const ProductInfo = () => {
   const context = useContext(myContext);
   const { loading, setLoading } = context;
   const [product, setProduct] = useState("");
   const { id } = useParams();
+  const cartItems = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
 
   // getProductData
   const getProductData = async () => {
@@ -18,7 +22,9 @@ const ProductInfo = () => {
 
     try {
       const productTemp = await getDoc(doc(fireDB, "products", id));
-      setProduct(productTemp.data());
+
+      // setProduct(productTemp.data());
+      setProduct({ ...productTemp.data(), id: productTemp.id });
       setLoading(false);
     } catch (error) {
       console.log(error, " <<< err");
@@ -26,16 +32,30 @@ const ProductInfo = () => {
     }
   };
 
+  const addCart = (item) => {
+    dispatch(addToCart(item));
+    toast.success("Add to cart");
+  };
+
+  const deleteCart = (item) => {
+    dispatch(deleteFromCart(item));
+    toast.success("Delete cart");
+  };
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cartItems));
+  }, [cartItems]);
+
   useEffect(() => {
     getProductData();
   }, []);
 
-  console.log(product, "<<<<");
+  // console.log(product, "<<<<");
 
   return (
     <Layout>
       <section className="!py-5 lg:!py-16 font-poppins dark:bg-gray-800">
-      {/* <section className="!py-5 lg:!py-16 font-poppin"> */}
+        {/* <section className="!py-5 lg:!py-16 font-poppin"> */}
         {loading ? (
           <>
             <div className="flex justify-center">
@@ -93,9 +113,23 @@ const ProductInfo = () => {
 
                   <div className="!mb-6" />
                   <div className="flex flex-wrap items-center !mb-6">
-                    <button className="cursor-pointer w-full !px-4 !py-3 text-center text-pink-600 bg-pink-100 border border-pink-600  hover:bg-pink-600 hover:text-gray-100 rounded-xl">
-                      Add to cart
-                    </button>
+                    {cartItems.some((pro) => pro.id === product.id) ? (
+                      <>
+                        <button
+                          onClick={() => deleteCart(product)}
+                          className="cursor-pointer w-full !px-4 !py-3 text-center text-pink-600 bg-pink-100 border border-pink-600  hover:bg-pink-600 hover:text-gray-100 rounded-xl"
+                        >
+                          Delete From cart
+                        </button>
+                      </>
+                    ) : (
+                      <button
+                        onClick={() => addCart(product)}
+                        className="cursor-pointer w-full !px-4 !py-3 text-center text-pink-600 bg-pink-100 border border-pink-600  hover:bg-pink-600 hover:text-gray-100 rounded-xl"
+                      >
+                        Add to cart
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>

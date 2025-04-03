@@ -31,6 +31,7 @@ const HomePageProductCard = () => {
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
+  
   return (
     <div className="mt-10">
       {/* Heading  */}

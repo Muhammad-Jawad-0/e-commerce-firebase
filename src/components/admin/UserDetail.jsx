@@ -1,4 +1,9 @@
+import { useContext } from "react";
+import myContext from "../../context/myContext";
+
 const UserDetail = () => {
+  const context = useContext(myContext);
+  const { getAllUser } = context;
   return (
     <div>
       <div>
@@ -18,39 +23,71 @@ const UserDetail = () => {
                 >
                   S.No.
                 </th>
+
                 <th
                   scope="col"
-                  className="h-12 px-6 text-md font-bold fontPara border-l first:border-l-0 border-pink-100 text-slate-700 bg-slate-100"
+                  className="h-12 px-6 text-md border-l first:border-l-0 border-pink-100 text-slate-700 bg-slate-100 font-bold fontPara"
                 >
-                  Location Name
+                  Name
                 </th>
+
                 <th
                   scope="col"
-                  className="h-12 px-6 text-md font-bold fontPara border-l first:border-l-0 border-pink-100 text-slate-700 bg-slate-100"
+                  className="h-12 px-6 text-md border-l first:border-l-0 border-pink-100 text-slate-700 bg-slate-100 font-bold fontPara"
                 >
-                  Action
+                  Email
                 </th>
+
                 <th
                   scope="col"
-                  className="h-12 px-6 text-md font-bold fontPara border-l first:border-l-0 border-pink-100 text-slate-700 bg-slate-100"
+                  className="h-12 px-6 text-md border-l first:border-l-0 border-pink-100 text-slate-700 bg-slate-100 font-bold fontPara"
                 >
-                  Action
+                  Uid
+                </th>
+
+                <th
+                  scope="col"
+                  className="h-12 px-6 text-md border-l first:border-l-0 border-pink-100 text-slate-700 bg-slate-100 font-bold fontPara"
+                >
+                  Role
+                </th>
+
+                <th
+                  scope="col"
+                  className="h-12 px-6 text-md border-l first:border-l-0 border-pink-100 text-slate-700 bg-slate-100 font-bold fontPara"
+                >
+                  Date
                 </th>
               </tr>
-              <tr className="text-pink-300">
-                <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 ">
-                  1.
-                </td>
-                <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 first-letter:uppercase ">
-                  {"name"}
-                </td>
-                <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 text-green-500 cursor-pointer ">
-                  Edit
-                </td>
-                <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 text-red-500 cursor-pointer ">
-                  Delete
-                </td>
-              </tr>
+              {getAllUser.map((user, index) => {
+                return (
+                  <tr key={index} className="text-pink-300">
+                    <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 ">
+                      {user ? `${index + 1}` : "0"}
+                    </td>
+
+                    <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 first-letter:uppercase ">
+                      {user.name}
+                    </td>
+
+                    <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 cursor-pointer ">
+                      {user.email}
+                    </td>
+
+                    <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 cursor-pointer ">
+                      {user.uid}
+                    </td>
+
+                    <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 cursor-pointer ">
+                      {user.role}
+                    </td>
+
+                    <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 cursor-pointer ">
+                      {user.date}
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
